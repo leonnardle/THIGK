@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".nhaphanghoa"
+
+    android:background="#BFDACE">
+
+
+    <EditText
+        android:hint="mã hàng"
+        android:id="@+id/edit_mahang"
+        android:layout_width="match_parent"
+        android:text="1"
+        android:layout_height="60dp"/>
+    <EditText
+        android:hint="tên hàng"
+        android:id="@+id/edit_tenhang"
+        android:layout_width="match_parent"
+        android:text="1"
+        android:layout_height="60dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinnerLoaiHangHoa"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="phanloai" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnThemlhh"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/black"
+
+                android:text="thêm lhh" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:hint="giá"
+        android:id="@+id/edit_gia"
+        android:text="1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+    <EditText
+        android:hint="dung tích"
+        android:id="@+id/edit_dungtich"
+        android:text="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPath"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="vui lòng chọn một hình ảnh"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnbrowse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:text="browse"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLuu"
+        android:backgroundTint="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu"/>
+</LinearLayout>

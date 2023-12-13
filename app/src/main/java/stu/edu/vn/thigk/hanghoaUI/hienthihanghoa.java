@@ -1,12 +1,15 @@
-package stu.edu.vn.thigk;
+package stu.edu.vn.thigk.hanghoaUI;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,7 +17,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import stu.edu.vn.thigk.R;
 import stu.edu.vn.thigk.adapter.AdapterHanghoa;
+import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.model.HangHoa;
 
@@ -45,8 +50,17 @@ public class hienthihanghoa extends AppCompatActivity {
         fa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
-                startActivityForResult(intent,requestcode);
+               /* Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
+                startActivityForResult(intent,requestcode);*/
+                Intent intent=new Intent(hienthihanghoa.this, chonmenu.class);
+               startActivityForResult(intent,requestcode);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                return false;
             }
         });
 
@@ -70,15 +84,18 @@ public class hienthihanghoa extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==this.requestcode&&data!=null){
 
-            if(data.hasExtra("tra")){
+           /* if(data.hasExtra("tra")){
                 HangHoa s= (HangHoa) data.getSerializableExtra("tra");
+                helper.insertHanghoa(s);
+                hienthiHanghoa();
+            }*/
+            if(data.hasExtra("tra3")){
+                HangHoa s= (HangHoa) data.getSerializableExtra("tra3");
                 helper.insertHanghoa(s);
                 hienthiHanghoa();
             }
         }
     }
-
-
 
     private void hienthiHanghoa() {
         listHanghoa=helper.getAllHanghoa();
@@ -88,4 +105,24 @@ public class hienthihanghoa extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
+    // chon nut sua va xoa
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index=info.position;
+        if(item.getItemId()==R.id.btnsua)
+        {
+            Intent intent=new Intent(hienthihanghoa.this,suahanghoa.class);
+            chon=adapter.getItem(index);
+            intent.putExtra("chon",chon);
+            startActivityForResult(intent,requestcode);
+        }
+       /* else if(item.getItemId()==R.id.btnxoa){
+            chon=adapter.getItem(index);
+            helper.deleteSach(chon.getMa()+"");
+            hienthisach();
+        }*/
+        return super.onContextItemSelected(item);
+    }
+
 }

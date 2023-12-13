@@ -6,6 +6,7 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -20,8 +21,17 @@
         android:theme="@style/Theme.THIGK"
         tools:targetApi="31" >
         <activity
+            android:name=".chonmenu"
+            android:exported="false" />
+        <activity
+            android:name=".loaihanghoaUI.nhapLoaihanghoa"
+            android:exported="false" />
+        <activity
+            android:name=".hanghoaUI.suahanghoa"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +39,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".nhaphanghoa"
+            android:name=".hanghoaUI.nhaphanghoa"
             android:exported="true" />
         <activity
-            android:name=".hienthihanghoa"
+            android:name=".hanghoaUI.hienthihanghoa"
             android:exported="true" />
     </application>
 

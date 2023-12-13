@@ -1,7 +1,5 @@
 package stu.edu.vn.thigk.model;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 
 public class HangHoa implements Serializable {

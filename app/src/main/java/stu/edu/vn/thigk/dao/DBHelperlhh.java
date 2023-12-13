@@ -10,7 +10,6 @@ import android.provider.BaseColumns;
 import java.util.ArrayList;
 import java.util.List;
 
-import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class DBHelperlhh extends SQLiteOpenHelper {

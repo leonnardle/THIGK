@@ -12,18 +12,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import stu.edu.vn.thigk.R;
+import stu.edu.vn.thigk.SelectImage;
+import stu.edu.vn.thigk.chonmenu;
+import stu.edu.vn.thigk.dao.DBHelper;
+import stu.edu.vn.thigk.dao.DBHelperlhh;
 import stu.edu.vn.thigk.loaihanghoaUI.nhapLoaihanghoa;
 import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class nhaphanghoa extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 1;
+    public static final int PICK_IMAGE_REQUEST = 1;
 
     List<LoaiHangHoa> listlhh = new ArrayList<>();
 
@@ -34,8 +39,10 @@ public class nhaphanghoa extends AppCompatActivity {
     TextView tv_path;
     Button btn_browse, btn_luu, btn_themlhh;
     ArrayAdapter<String> adapter;
+    DBHelperlhh helperlhh;
+    DBHelper helper;
     HangHoa chon;
-    int requestcode = 113, resultcode = 115;
+    int requestcode = 114, resultcode = 115;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +50,11 @@ public class nhaphanghoa extends AppCompatActivity {
         setContentView(R.layout.activity_nhaphanghoa);
         addControl();
         addEvent();
+        getintentData();
     }
+
+
+
     private void addControl() {
         txt_mahang = findViewById(R.id.edit_mahang);
         txt_tenhang = findViewById(R.id.edit_tenhang);
@@ -53,19 +64,16 @@ public class nhaphanghoa extends AppCompatActivity {
         tv_path = findViewById(R.id.tvPath);
         btn_browse = findViewById(R.id.btnbrowse);
         btn_luu = findViewById(R.id.btnLuu);
-        btn_themlhh = findViewById(R.id.btnThemlhh);
-        LoaiHangHoa l1 = new LoaiHangHoa("3", "3");
-        LoaiHangHoa l2 = new LoaiHangHoa("2", "2");
-      /*  listlhh.add(l1);
-        listlhh.add(l2);
+        helperlhh=new DBHelperlhh(nhaphanghoa.this);
+        helper= new DBHelper(nhaphanghoa.this);
+       listlhh.addAll(helperlhh.getAllloaiHanghoa());
         for (LoaiHangHoa l: listlhh) {
             listTenloai.add(l.getTenloai());
 
-        }*/
-        adapter = new ArrayAdapter<>(nhaphanghoa.this, android.R.layout.simple_list_item_1, listTenloai);
-
+        }
         chon = null;
-
+        // add lhh
+        adapter = new ArrayAdapter<>(nhaphanghoa.this, android.R.layout.simple_list_item_1, listTenloai);
         SpinnerLoaihanghoa.setAdapter(adapter);
 
     }
@@ -79,20 +87,22 @@ public class nhaphanghoa extends AppCompatActivity {
         btn_browse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFileChooser();
+
+                Intent intent= SelectImage.openFileChooser();
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
             }
         });
     }
 
-    private void xulyluu() {
+    private HangHoa setChon(HangHoa hh)
+    {
         int dem=SpinnerLoaihanghoa.getCount();
         String path = tv_path.getText().toString();
-        //LoaiHangHoa lhh=new LoaiHangHoa("1",autoCompleteTextViewLHH.getText().toString());
         if (chon == null) {
             chon = new HangHoa();
         }
         chon.setMaHang(txt_mahang.getText().toString());
-            chon.setTenHang(txt_tenhang.getText().toString());
+        chon.setTenHang(txt_tenhang.getText().toString());
         if(dem<=0)
         {
             chon.setLoaiHangHoa("");
@@ -103,26 +113,36 @@ public class nhaphanghoa extends AppCompatActivity {
         }
         chon.setGia(Double.parseDouble(txt_gia.getText().toString()));
         chon.setDungtich(Double.parseDouble(txt_dungtich.getText().toString()));
-        chon.setHinhanh(path);
-        //Intent intent = getIntent();
-        Intent intent = new Intent();
-        intent.putExtra("tra3", chon);
-        setResult(requestcode, intent);
-        finish();
+        if(path.equals("vui lòng chọn một hình ảnh"))
+            chon.setHinhanh("");
+        else
+            chon.setHinhanh(path);
+        return  chon;
     }
-    private void openFileChooser() {
-        Intent intent;
-        if (Build.VERSION.SDK_INT < 19) {
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-        } else {
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    private void xulyluu() {
+        if(helper.isManvExists(chon.getMaHang()))
+        {
+            Toast.makeText(nhaphanghoa.this, "Mã hàng đã tồn tại. Vui lòng chọn mã hàng khác.", Toast.LENGTH_SHORT).show();
+            txt_mahang.setText("");
+        }
+        else {
+
+            //LoaiHangHoa lhh=new LoaiHangHoa("1",autoCompleteTextViewLHH.getText().toString());
+           chon=setChon(chon);
+            Intent intent = new Intent();
+            intent.putExtra("trahh", chon);
+            setResult(resultcode, intent);
+            finish();
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(nhaphanghoa.this, chonmenu.class);
+        startActivity(intent);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -135,10 +155,19 @@ public class nhaphanghoa extends AppCompatActivity {
             // Ví dụ: hiển thị hình ảnh trong ImageView hoặc lưu đường dẫn vào biến.
             tv_path.setText(selectedImageUri.toString());
         }
-
     }
-
-
-
-
+    private void getintentData() {
+        Intent intent=getIntent();
+        if(intent.hasExtra("chon")){
+            chon= (HangHoa) intent.getSerializableExtra("chon");
+            if(chon!=null) {
+                txt_mahang.setFocusable(false);
+                txt_mahang.setText(chon.getMaHang());
+                txt_tenhang.setText(chon.getTenHang());
+                txt_gia.setText(chon.getGia() + "");
+                txt_dungtich.setText(chon.getDungtich() + "");
+                tv_path.setText(chon.getHinhanh());
+            }
+        }
+    }
 }

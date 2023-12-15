@@ -160,9 +160,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(TABLE.COLUMN_Ten, hh.getTenHang());
         values.put(TABLE.COLUMN_Phanloai, hh.getTenloai());
-        // Chuyển đổi Bitmap sang byte[] để lưu vào cột COLUMN_hinhanh
-       // byte[] imageData = getBitmapAsByteArray(hh.getHinhanh());
-        //values.put(TABLE.COLUMN_hinhanh, imageData);
+
+        values.put(TABLE.COLUMN_hinhanh, hh.getHinhanh());
         values.put(TABLE.COLUMN_Gia, hh.getGia());
         values.put(TABLE.COLUMN_Dungtich, hh.getDungtich());
 
@@ -173,11 +172,20 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    // Phương thức chuyển đổi Bitmap sang byte[]
-   /* private byte[] getBitmapAsByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-        return outputStream.toByteArray();
-    }*/
+    public boolean isManvExists(String mahanghoa) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT COUNT(*) FROM " + TABLE.TABLE_NAME +
+                " WHERE " + TABLE.COLUMN_M + " = ?";
+
+        String[] selectionArgs = {mahanghoa};
+
+        Cursor cursor = db.rawQuery(query, selectionArgs);
+        cursor.moveToFirst();
+
+        int count = cursor.getInt(0);
+        cursor.close();
+
+        return count > 0;
+    }
 
 }

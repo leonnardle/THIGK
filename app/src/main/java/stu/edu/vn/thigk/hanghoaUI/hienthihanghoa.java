@@ -17,18 +17,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import stu.edu.vn.thigk.MainActivity;
 import stu.edu.vn.thigk.R;
 import stu.edu.vn.thigk.adapter.AdapterHanghoa;
 import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
+import stu.edu.vn.thigk.dao.DBHelperlhh;
 import stu.edu.vn.thigk.model.HangHoa;
+import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class hienthihanghoa extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_ACTIVITY2 =115 ;
     FloatingActionButton fa;
     AdapterHanghoa adapter;
     ListView listView;
     DBHelper helper;
+    DBHelperlhh helplhh;
     List<HangHoa> listHanghoa=new ArrayList<>();
     HangHoa chon;
     int requestcode=113,resultcode=115;
@@ -39,8 +44,9 @@ public class hienthihanghoa extends AppCompatActivity {
         addControls();
         addEvent();
         helper=new DBHelper(hienthihanghoa.this);
-        helper.QueryData(DBHelper.Drop_table);
-        helper.QueryData(DBHelper.SQL_Create_Table);
+        helplhh=new DBHelperlhh(hienthihanghoa.this);
+       /* helper.QueryData(DBHelper.Drop_table);
+        helper.QueryData(DBHelper.SQL_Create_Table);*/
 
         hienthiHanghoa();
         chon=null;
@@ -53,14 +59,7 @@ public class hienthihanghoa extends AppCompatActivity {
                /* Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
                 startActivityForResult(intent,requestcode);*/
                 Intent intent=new Intent(hienthihanghoa.this, chonmenu.class);
-               startActivityForResult(intent,requestcode);
-            }
-        });
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return false;
+               startActivityForResult(intent,REQUEST_CODE_ACTIVITY2);
             }
         });
 
@@ -79,32 +78,6 @@ public class hienthihanghoa extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.context_menu,menu);
         }
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==this.requestcode&&data!=null){
-
-           /* if(data.hasExtra("tra")){
-                HangHoa s= (HangHoa) data.getSerializableExtra("tra");
-                helper.insertHanghoa(s);
-                hienthiHanghoa();
-            }*/
-            if(data.hasExtra("tra3")){
-                HangHoa s= (HangHoa) data.getSerializableExtra("tra3");
-                helper.insertHanghoa(s);
-                hienthiHanghoa();
-            }
-        }
-    }
-
-    private void hienthiHanghoa() {
-        listHanghoa=helper.getAllHanghoa();
-        if(listHanghoa.size()>0){
-            adapter=new AdapterHanghoa(hienthihanghoa.this,R.layout.item_hanghoa,listHanghoa,helper);
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-    }
     // chon nut sua va xoa
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
@@ -112,17 +85,63 @@ public class hienthihanghoa extends AppCompatActivity {
         int index=info.position;
         if(item.getItemId()==R.id.btnsua)
         {
-            Intent intent=new Intent(hienthihanghoa.this,suahanghoa.class);
+            Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
             chon=adapter.getItem(index);
             intent.putExtra("chon",chon);
-            startActivityForResult(intent,requestcode);
+            startActivityForResult(intent,resultcode);
         }
-       /* else if(item.getItemId()==R.id.btnxoa){
+        else if(item.getItemId()==R.id.btnxoa){
             chon=adapter.getItem(index);
-            helper.deleteSach(chon.getMa()+"");
-            hienthisach();
-        }*/
+            helper.deleteHanghoa(chon.getMaHang());
+            hienthiHanghoa();
+        }
         return super.onContextItemSelected(item);
+    }
+
+    private  void capnhathanghoa(Intent intent)
+    {
+        if (intent.hasExtra("trahh")) {
+            chon= (HangHoa) intent.getSerializableExtra("trahh");
+            if (helper.isManvExists(chon.getMaHang())) {
+                helper.updateHanghoa(chon);
+            }
+            hienthiHanghoa();
+        }
+    }
+    private void xoahanghoa(Intent intent)
+    {
+        if (intent.hasExtra("trahh") ) {
+            chon = (HangHoa) intent.getSerializableExtra("trahh");
+            helper.insertHanghoa(chon);
+            hienthiHanghoa();
+        }
+    }
+    @Override
+        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if(resultCode==this.resultcode) {
+                capnhathanghoa(data);
+            }
+            else if (this.resultcode==requestCode){
+               xoahanghoa(data);
+            }
+
+        }
+
+    private void hienthiHanghoa() {
+        listHanghoa=helper.getAllHanghoa();
+        if(listHanghoa.size()>=0){
+            adapter=new AdapterHanghoa(hienthihanghoa.this,R.layout.item_hanghoa,listHanghoa,helper);
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(hienthihanghoa.this, MainActivity.class);
+        startActivity(intent);
     }
 
 }

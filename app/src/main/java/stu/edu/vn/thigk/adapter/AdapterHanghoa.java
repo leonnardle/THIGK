@@ -51,18 +51,13 @@
 
             gia.setText(hh.getGia() + "");
             dungtich.setText(hh.getDungtich() + "");
-            if (hh.getHinhanh() != null) {
+            if (!hh.getHinhanh().equals("")) {
                 Uri imageUri = Uri.parse(hh.getHinhanh());
-                context.getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                if(imageUri!=null) {
+                    context.getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
 
-
-                // Sử dụng BitmapFactory để tạo Bitmap từ InputStream
-                      /*  Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
-                        imageStream.close(); // Đóng InputStream sau khi sử dụng xong*/
                 Picasso.get().load(imageUri).into(imageView);
-                        /*if (bitmap != null) {
-                            imageView.setImageBitmap(bitmap);
-                        }*/
 
             }
 

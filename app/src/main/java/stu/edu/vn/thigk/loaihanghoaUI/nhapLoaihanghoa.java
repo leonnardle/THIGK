@@ -17,6 +17,7 @@ public class nhapLoaihanghoa extends AppCompatActivity {
     EditText maloai,tenloai;
     Button btnluu;
 
+    int requestcode=113;
     LoaiHangHoa lhh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,9 @@ public class nhapLoaihanghoa extends AppCompatActivity {
         }
         lhh.setMaloai(ma);
         lhh.setTenloai(ten);
-
-
+        Intent intent=new Intent();
+        intent.putExtra("tralhh",lhh);
+        setResult(requestcode,intent);
         finish();
     }
 }

@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import stu.edu.vn.thigk.hanghoaUI.hienthihanghoa;
+import stu.edu.vn.thigk.loaihanghoaUI.hienthiloaihanghoa;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 3;
     EditText username, password;
     Button btnLogin;
 

@@ -53,7 +53,7 @@ public class DBHelperlhh extends SQLiteOpenHelper {
         long newRow = db.insert(DBHelper.TABLE.TABLE_NAME, null, values);
     }
 
-    public List<LoaiHangHoa> getAllHanghoa() {
+    public List<LoaiHangHoa> getAllloaiHanghoa() {
         List<LoaiHangHoa> listloaiHangHoa = new ArrayList<>();
         String[] projection = {
                 DBHelper.TABLE.COLUMN_M,

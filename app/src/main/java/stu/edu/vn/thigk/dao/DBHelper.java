@@ -180,12 +180,14 @@ public class DBHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {mahanghoa};
 
         Cursor cursor = db.rawQuery(query, selectionArgs);
-        cursor.moveToFirst();
-
-        int count = cursor.getInt(0);
-        cursor.close();
-
-        return count > 0;
+        if (cursor.moveToFirst()) {
+            int count = cursor.getInt(0);
+            cursor.close();
+            return count > 0;
+        } else {
+            cursor.close();
+            return false;
+        }
     }
 
 }

@@ -10,11 +10,13 @@ import android.widget.Button;
 
 import stu.edu.vn.thigk.hanghoaUI.hienthihanghoa;
 import stu.edu.vn.thigk.hanghoaUI.nhaphanghoa;
+import stu.edu.vn.thigk.loaihanghoaUI.hienthiloaihanghoa;
 import stu.edu.vn.thigk.loaihanghoaUI.nhapLoaihanghoa;
 import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class chonmenu extends AppCompatActivity {
+    private  final int loaihanghoaview = 114;
 
     private  final int REQUEST_CODE_ACTIVITY2 = 114;
     Button btnchonlhh, btnchonhanghoa;
@@ -39,9 +41,8 @@ public class chonmenu extends AppCompatActivity {
         btnchonlhh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(chonmenu.this, nhapLoaihanghoa.class);
-
-                startActivityForResult(intent, REQUEST_CODE_ACTIVITY2);
+                Intent intent = new Intent(chonmenu.this, hienthiloaihanghoa.class);
+                startActivityForResult(intent, loaihanghoaview);
             }
         });
     }

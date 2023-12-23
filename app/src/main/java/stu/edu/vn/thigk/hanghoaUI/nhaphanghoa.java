@@ -42,7 +42,7 @@ public class nhaphanghoa extends AppCompatActivity {
     DBHelperlhh helperlhh;
     DBHelper helper;
     HangHoa chon;
-    int requestcode = 114, resultcode = 115;
+    int resultUpdate = 114, resultcode = 115;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,23 +120,15 @@ public class nhaphanghoa extends AppCompatActivity {
         return  chon;
     }
     private void xulyluu() {
-        if(helper.isManvExists(chon.getMaHang()))
-        {
-            Toast.makeText(nhaphanghoa.this, "Mã hàng đã tồn tại. Vui lòng chọn mã hàng khác.", Toast.LENGTH_SHORT).show();
-            txt_mahang.setText("");
-        }
-        else {
 
             //LoaiHangHoa lhh=new LoaiHangHoa("1",autoCompleteTextViewLHH.getText().toString());
-           chon=setChon(chon);
-            Intent intent = new Intent();
-            intent.putExtra("trahh", chon);
-            setResult(resultcode, intent);
-            finish();
-        }
+        chon=setChon(chon);
+        Intent intent = new Intent();
+        intent.putExtra("trahh", chon);
+        setResult(resultcode, intent);
+        finish();
+
     }
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -9,15 +9,15 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_maloai"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:text="tên :"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
              />
 
         <TextView
             android:id="@+id/tv_tenloai"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import stu.edu.vn.thigk.R;
+import stu.edu.vn.thigk.chonmenu;
+import stu.edu.vn.thigk.hanghoaUI.nhaphanghoa;
+import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class nhapLoaihanghoa extends AppCompatActivity {
@@ -24,6 +27,7 @@ public class nhapLoaihanghoa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nhap_loaihanghoa);
         addControl();
+        getintentData();
         addEvent();
     }
 
@@ -54,5 +58,23 @@ public class nhapLoaihanghoa extends AppCompatActivity {
         intent.putExtra("tralhh",lhh);
         setResult(requestcode,intent);
         finish();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(nhapLoaihanghoa.this, hienthiloaihanghoa.class);
+        startActivity(intent);
+    }
+    private void getintentData() {
+        Intent intent=getIntent();
+        if(intent.hasExtra("chon")){
+            lhh= (LoaiHangHoa) intent.getSerializableExtra("chon");
+            if(lhh!=null) {
+                maloai.setFocusable(false);
+                maloai.setText(lhh.getMaloai());
+                tenloai.setText(lhh.getTenloai());
+
+            }
+        }
     }
 }

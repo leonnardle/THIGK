@@ -39,6 +39,7 @@
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = this.context.getLayoutInflater();
             View item = inflater.inflate(this.res, null);
+            TextView mahang = item.findViewById(R.id.tvmahang);
 
             TextView tenhang = item.findViewById(R.id.tvTenhang);
             TextView phanloai = item.findViewById(R.id.tvPhanloai);
@@ -46,6 +47,7 @@
             TextView dungtich = item.findViewById(R.id.tvDungtich);
             ImageView imageView = item.findViewById(R.id.imagehanghoa);
             final HangHoa hh = obj.get(position);
+            mahang.setText(hh.getMaHang());
             tenhang.setText(hh.getTenHang());
             phanloai.setText(hh.getTenloai());
 

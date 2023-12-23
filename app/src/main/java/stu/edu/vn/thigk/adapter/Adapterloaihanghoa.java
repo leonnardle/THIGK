@@ -36,11 +36,9 @@ public class Adapterloaihanghoa extends ArrayAdapter<LoaiHangHoa> {
         LayoutInflater inflater = this.context.getLayoutInflater();
         View item = inflater.inflate(this.res, null);
 
-        TextView maloai = item.findViewById(R.id.tv_maloai);
         TextView tenloai = item.findViewById(R.id.tv_tenloai);
 
         final LoaiHangHoa hh = obj.get(position);
-        maloai.setText(hh.getMaloai());
         tenloai.setText(hh.getTenloai());
         return item;
     }

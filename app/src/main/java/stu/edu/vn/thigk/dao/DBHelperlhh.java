@@ -128,5 +128,21 @@ public class DBHelperlhh extends SQLiteOpenHelper {
         int updatedRows = db.update(DBHelper.TABLE.TABLE_NAME, values, selection, selectionArgs);
 
     }
+    public boolean isMaloaiExists(String maloai) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT COUNT(*) FROM " + DBHelper.TABLE.TABLE_NAME +
+                " WHERE " + DBHelper.TABLE.COLUMN_M + " = ?";
 
+        String[] selectionArgs = {maloai};
+
+        Cursor cursor = db.rawQuery(query, selectionArgs);
+        if (cursor.moveToFirst()) {
+            int count = cursor.getInt(0);
+            cursor.close();
+            return count > 0;
+        } else {
+            cursor.close();
+            return false;
+        }
+    }
 }

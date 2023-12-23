@@ -2,8 +2,10 @@ package stu.edu.vn.thigk.hanghoaUI;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -36,7 +38,7 @@ public class hienthihanghoa extends AppCompatActivity {
     DBHelperlhh helplhh;
     List<HangHoa> listHanghoa=new ArrayList<>();
     HangHoa chon;
-    int requestcode=113,resultcode=115;
+    int requestUpdate=114,resultcode=115;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class hienthihanghoa extends AppCompatActivity {
         addEvent();
         helper=new DBHelper(hienthihanghoa.this);
         helplhh=new DBHelperlhh(hienthihanghoa.this);
-       /* helper.QueryData(DBHelper.Drop_table);
+      /*  helper.QueryData(DBHelper.Drop_table);
         helper.QueryData(DBHelper.SQL_Create_Table);*/
 
         hienthiHanghoa();
@@ -88,12 +90,10 @@ public class hienthihanghoa extends AppCompatActivity {
             Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
             chon=adapter.getItem(index);
             intent.putExtra("chon",chon);
-            startActivityForResult(intent,resultcode);
+            startActivityForResult(intent,REQUEST_CODE_ACTIVITY2);
         }
         else if(item.getItemId()==R.id.btnxoa){
-            chon=adapter.getItem(index);
-            helper.deleteHanghoa(chon.getMaHang());
-            hienthiHanghoa();
+           xulyxoa(index);
         }
         return super.onContextItemSelected(item);
     }
@@ -101,31 +101,27 @@ public class hienthihanghoa extends AppCompatActivity {
     private  void capnhathanghoa(Intent intent)
     {
         if (intent.hasExtra("trahh")) {
-            chon= (HangHoa) intent.getSerializableExtra("trahh");
             if (helper.isManvExists(chon.getMaHang())) {
                 helper.updateHanghoa(chon);
+                hienthiHanghoa();
             }
-            hienthiHanghoa();
-        }
-    }
-    private void xoahanghoa(Intent intent)
-    {
-        if (intent.hasExtra("trahh") ) {
-            chon = (HangHoa) intent.getSerializableExtra("trahh");
-            helper.insertHanghoa(chon);
-            hienthiHanghoa();
         }
     }
     @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
-            if(resultCode==this.resultcode) {
-                capnhathanghoa(data);
-            }
-            else if (this.resultcode==requestCode){
-               xoahanghoa(data);
-            }
+            if(requestCode==this.resultcode) {
+                chon=(HangHoa) data.getSerializableExtra("trahh");
+                if(helper.isManvExists(chon.getMaHang()))
+                {
+                    capnhathanghoa(data);
+                }
+                else {
+                    helper.insertHanghoa(chon);
+                    hienthiHanghoa();
+                }
 
+            }
         }
 
     private void hienthiHanghoa() {
@@ -136,12 +132,31 @@ public class hienthihanghoa extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(hienthihanghoa.this, MainActivity.class);
         startActivity(intent);
     }
+    private void xulyxoa(int index) {
+        chon = adapter.getItem(index);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(hienthihanghoa.this);
+        dialog.setTitle("Xác nhận xóa");
+        dialog.setMessage("Bạn có muốn xóa không?");
+        dialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                helper.deleteHanghoa(chon.getMaHang());
+                hienthiHanghoa();
+            }
+        });
+        dialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+                dialogInterface.dismiss();
+            }
+        });
+        dialog.show();
+    }
 }

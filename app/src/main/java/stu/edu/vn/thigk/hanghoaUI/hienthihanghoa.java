@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,12 +24,12 @@ import java.util.List;
 
 import stu.edu.vn.thigk.MainActivity;
 import stu.edu.vn.thigk.R;
+import stu.edu.vn.thigk.about;
 import stu.edu.vn.thigk.adapter.AdapterHanghoa;
 import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.dao.DBHelperlhh;
 import stu.edu.vn.thigk.model.HangHoa;
-import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class hienthihanghoa extends AppCompatActivity {
 
@@ -49,11 +52,30 @@ public class hienthihanghoa extends AppCompatActivity {
         helplhh=new DBHelperlhh(hienthihanghoa.this);
       /*  helper.QueryData(DBHelper.Drop_table);
         helper.QueryData(DBHelper.SQL_Create_Table);*/
-
         hienthiHanghoa();
         chon=null;
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mnu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.
+        if(item.getItemId() == R.id.about)
+        {
+            Intent aboutIntent = new Intent(hienthihanghoa.this, about.class);
+            startActivity(aboutIntent);
+            return true;
+        }
+        else
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void addEvent() {
         fa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +93,8 @@ public class hienthihanghoa extends AppCompatActivity {
         fa=findViewById(R.id.faThem);
         listView = findViewById(R.id.lvQlhh);
         registerForContextMenu(listView);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
     }
     @Override
@@ -110,9 +134,9 @@ public class hienthihanghoa extends AppCompatActivity {
     @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
-            if(requestCode==this.resultcode) {
+            if(requestCode==this.resultcode&&data!=null) {
                 chon=(HangHoa) data.getSerializableExtra("trahh");
-                if(helper.isManvExists(chon.getMaHang()))
+                if(helper.isManvExists(chon.getMaHang())&&chon!=null)
                 {
                     capnhathanghoa(data);
                 }

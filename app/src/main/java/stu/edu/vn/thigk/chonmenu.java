@@ -1,10 +1,15 @@
 package stu.edu.vn.thigk;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -46,10 +51,34 @@ public class chonmenu extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mnu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.
+        if(item.getItemId() == R.id.about)
+        {
+            Intent aboutIntent = new Intent(chonmenu.this, about.class);
+            startActivity(aboutIntent);
+            Log.d("Menu", "ToolbarNhaphanghoa clicked"); // Thêm dòng log
 
+            return true;
+        }
+        else
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void addconTrol() {
         btnchonhanghoa = findViewById(R.id.btn_open_hanghoa);
         btnchonlhh=findViewById(R.id.btn_open_themloai);
+        Toolbar toolbar = findViewById(R.id.toolbarChonmenu);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -78,12 +107,11 @@ public class chonmenu extends AppCompatActivity {
             setResult(113, resultIntent);
             finish();
         }
-
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(chonmenu.this, hienthihanghoa.class);
+        Intent intent = new Intent(chonmenu.this, about.class);
         startActivity(intent);
     }
 }

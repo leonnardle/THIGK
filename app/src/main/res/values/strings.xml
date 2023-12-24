@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">THIGK</string>
+    <string name="title_activity_abouts">abouts</string>
+    <string name="title_activity_about">about</string>
 </resources>

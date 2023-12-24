@@ -5,5 +5,5 @@
     android:title="Sửa thông tin" />
     <item
         android:id="@+id/btnxoa"
-        android:title="Xóa đặt phòng" />
+        android:title="Xóa" />
 </menu>

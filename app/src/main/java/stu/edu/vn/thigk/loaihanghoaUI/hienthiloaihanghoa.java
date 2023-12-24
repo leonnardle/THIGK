@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import stu.edu.vn.thigk.R;
+import stu.edu.vn.thigk.about;
 import stu.edu.vn.thigk.adapter.AdapterHanghoa;
 import stu.edu.vn.thigk.adapter.Adapterloaihanghoa;
 import stu.edu.vn.thigk.chonmenu;
@@ -48,11 +52,30 @@ public class hienthiloaihanghoa extends AppCompatActivity {
         helper=new DBHelperlhh(hienthiloaihanghoa.this);
 /*        helper.QueryData(DBHelper.Drop_table);
         helper.QueryData(DBHelper.SQL_Create_Table);*/
-
         hienthiloaiHanghoa();
         chon=null;
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mnu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.
+        if(item.getItemId() == R.id.about)
+        {
+            Intent aboutIntent = new Intent(hienthiloaihanghoa.this, about.class);
+            startActivity(aboutIntent);
+            return true;
+        }
+        else
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void hienthiloaiHanghoa() {
         listloaiHanghoa=helper.getAllloaiHanghoa();
         if(listloaiHanghoa.size()>=0){
@@ -73,10 +96,13 @@ public class hienthiloaihanghoa extends AppCompatActivity {
         });
     }
 
+
     private void addControl() {
         fa=findViewById(R.id.faThemloai);
         listView = findViewById(R.id.lvQlloaihh);
         registerForContextMenu(listView);
+        Toolbar toolbar = findViewById(R.id.toolbarLoaihanghoa);
+        setSupportActionBar(toolbar);
     }
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);

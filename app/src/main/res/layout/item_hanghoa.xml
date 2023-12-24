@@ -26,23 +26,23 @@
         <TextView
             android:text="mã: "
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="20dp"/>
         <TextView
             android:text="tên: "
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="20dp"/>
         <TextView
-            android:text="phân loại: "
+            android:text="loại: "
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="20dp"/>
         <TextView
             android:text="giá: "
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="20dp"/>
         <TextView
             android:text="dung tích: "
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="20dp"/>
 
     </LinearLayout>
 
@@ -54,23 +54,23 @@
             <TextView
                 android:id="@+id/tvmahang"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="20dp"/>
             <TextView
                 android:id="@+id/tvTenhang"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="20dp"/>
             <TextView
                 android:id="@+id/tvPhanloai"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="20dp" />
             <TextView
                 android:id="@+id/tvgia"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="20dp" />
             <TextView
                 android:id="@+id/tvDungtich"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="20dp" />
         </LinearLayout>
 
 

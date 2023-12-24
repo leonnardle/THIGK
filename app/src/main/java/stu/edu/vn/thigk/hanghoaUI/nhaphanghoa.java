@@ -1,11 +1,15 @@
 package stu.edu.vn.thigk.hanghoaUI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,6 +23,7 @@ import java.util.List;
 
 import stu.edu.vn.thigk.R;
 import stu.edu.vn.thigk.SelectImage;
+import stu.edu.vn.thigk.about;
 import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.dao.DBHelperlhh;
@@ -53,7 +58,27 @@ public class nhaphanghoa extends AppCompatActivity {
         getintentData();
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mnu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.
+        if(item.getItemId() == R.id.about)
+        {
+            Intent aboutIntent = new Intent(nhaphanghoa.this, about.class);
+            startActivity(aboutIntent);
+            return true;
+        }
+        else
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void addControl() {
         txt_mahang = findViewById(R.id.edit_mahang);
@@ -75,7 +100,8 @@ public class nhaphanghoa extends AppCompatActivity {
         // add lhh
         adapter = new ArrayAdapter<>(nhaphanghoa.this, android.R.layout.simple_list_item_1, listTenloai);
         SpinnerLoaihanghoa.setAdapter(adapter);
-
+        Toolbar toolbar = findViewById(R.id.toolbarNhaphanghoa);
+        setSupportActionBar(toolbar);
     }
     private void addEvent() {
         btn_luu.setOnClickListener(new View.OnClickListener() {

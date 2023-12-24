@@ -11,14 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
-        <TextView
-            android:background="#252520"
-            android:text="Quản lý hàng hóa"
-            android:textSize="30dp"
-            android:textColor="@color/white"
-            android:gravity="center"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:backgroundTint="@color/black"
+            app:title="QUẢN LÝ HÀNG HÓA"
+            app:titleTextColor="@color/white"
+            android:textAlignment="center"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"/>
+
+
         <ListView
             android:id="@+id/lvQlhh"
             android:layout_width="wrap_content"

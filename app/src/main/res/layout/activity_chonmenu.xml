@@ -6,6 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chonmenu">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarChonmenu"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:backgroundTint="#0A0C0A"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:id="@+id/btn_open_themloai"
         android:layout_width="100dp"

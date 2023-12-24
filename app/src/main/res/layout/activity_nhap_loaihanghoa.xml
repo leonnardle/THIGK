@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".loaihanghoaUI.nhapLoaihanghoa">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarnhaploaihanghoa"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/black"
+        app:titleTextColor="@color/white"
+        android:textAlignment="center"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"/>
     <EditText
         android:hint="mã loại"
         android:id="@+id/edit_maloai"

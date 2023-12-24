@@ -1,14 +1,19 @@
 package stu.edu.vn.thigk.loaihanghoaUI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import stu.edu.vn.thigk.R;
+import stu.edu.vn.thigk.about;
 import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.hanghoaUI.nhaphanghoa;
 import stu.edu.vn.thigk.model.HangHoa;
@@ -39,12 +44,34 @@ public class nhapLoaihanghoa extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mnu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.
+        if(item.getItemId() == R.id.about)
+        {
+            Intent aboutIntent = new Intent(nhapLoaihanghoa.this, about.class);
+            startActivity(aboutIntent);
+            return true;
+        }
+        else
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void addControl() {
         lhh=null;
         maloai=findViewById(R.id.edit_maloai);
         tenloai=findViewById(R.id.edit_tenloai);
         btnluu=findViewById(R.id.btnLuuLoaihh);
+        Toolbar toolbar = findViewById(R.id.toolbarnhaploaihanghoa);
+        setSupportActionBar(toolbar);
     }
     private  void xulyluu(){
         String ma=maloai.getText().toString();

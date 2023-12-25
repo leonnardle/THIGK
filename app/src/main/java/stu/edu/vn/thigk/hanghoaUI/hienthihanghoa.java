@@ -26,9 +26,9 @@ import stu.edu.vn.thigk.MainActivity;
 import stu.edu.vn.thigk.R;
 import stu.edu.vn.thigk.about;
 import stu.edu.vn.thigk.adapter.AdapterHanghoa;
-import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.dao.DBHelperlhh;
+import stu.edu.vn.thigk.loaihanghoaUI.hienthiloaihanghoa;
 import stu.edu.vn.thigk.model.HangHoa;
 
 public class hienthihanghoa extends AppCompatActivity {
@@ -70,6 +70,12 @@ public class hienthihanghoa extends AppCompatActivity {
             startActivity(aboutIntent);
             return true;
         }
+        else if(item.getItemId() == R.id.loaihanghoa)
+        {
+            Intent aboutIntent = new Intent(hienthihanghoa.this, hienthiloaihanghoa.class);
+            startActivity(aboutIntent);
+            return true;
+        }
         else
         {
             finish();
@@ -82,7 +88,7 @@ public class hienthihanghoa extends AppCompatActivity {
             public void onClick(View view) {
                /* Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
                 startActivityForResult(intent,requestcode);*/
-                Intent intent=new Intent(hienthihanghoa.this, chonmenu.class);
+                Intent intent=new Intent(hienthihanghoa.this, nhaphanghoa.class);
                startActivityForResult(intent,REQUEST_CODE_ACTIVITY2);
             }
         });

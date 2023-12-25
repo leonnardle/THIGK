@@ -5,7 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,18 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import stu.edu.vn.thigk.R;
-import stu.edu.vn.thigk.SelectImage;
 import stu.edu.vn.thigk.about;
-import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.dao.DBHelperlhh;
-import stu.edu.vn.thigk.loaihanghoaUI.nhapLoaihanghoa;
 import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
@@ -158,7 +153,7 @@ public class nhaphanghoa extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(nhaphanghoa.this, chonmenu.class);
+        Intent intent = new Intent(nhaphanghoa.this, hienthihanghoa.class);
         startActivity(intent);
     }
     @Override

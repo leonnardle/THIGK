@@ -1,6 +1,8 @@
 package stu.edu.vn.thigk.dao;
 
 
+import static android.content.ContentValues.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import stu.edu.vn.thigk.model.HangHoa;
+import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -39,7 +42,6 @@ public class DBHelper extends SQLiteOpenHelper {
             TABLE.COLUMN_hinhanh + " TEXT, " +
             TABLE.COLUMN_Gia + " REAL, " +
             TABLE.COLUMN_Dungtich + " REAL)";
-
 
 
     public  static  final String Drop_table = "DROP TABLE IF EXISTS " + TABLE.TABLE_NAME;
@@ -146,7 +148,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteHanghoa(String Ma)
+    public void deleteHanghoa(String Ma )
     {
         String selection = TABLE.COLUMN_M + " = ?";
         String[] selectionArgs ={Ma};
@@ -188,6 +190,33 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor.close();
             return false;
         }
+    }
+    public boolean isPhanloaiEqual(String valueToCheck) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT " + TABLE.COLUMN_Phanloai +
+                " FROM " + TABLE.TABLE_NAME +
+                " WHERE " + TABLE.COLUMN_Phanloai + " = ?";
+        String[] selectionArgs = {valueToCheck};
+
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(query, selectionArgs);
+
+            // Kiểm tra xem có kết quả của truy vấn không
+            if (cursor != null && cursor.moveToFirst()) {
+                String phanloaiValue = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.TABLE.COLUMN_Phanloai));
+                return phanloaiValue.equals(valueToCheck);
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ nếu có lỗi SQL
+            Log.e(TAG, "isPhanloaiEqual: Error executing SQL query", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return false;
     }
 
 }

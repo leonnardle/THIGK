@@ -14,9 +14,6 @@ import android.widget.EditText;
 
 import stu.edu.vn.thigk.R;
 import stu.edu.vn.thigk.about;
-import stu.edu.vn.thigk.chonmenu;
-import stu.edu.vn.thigk.hanghoaUI.nhaphanghoa;
-import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class nhapLoaihanghoa extends AppCompatActivity {

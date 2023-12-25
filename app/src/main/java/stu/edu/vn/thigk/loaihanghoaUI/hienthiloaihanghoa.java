@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,14 +25,10 @@ import java.util.List;
 
 import stu.edu.vn.thigk.R;
 import stu.edu.vn.thigk.about;
-import stu.edu.vn.thigk.adapter.AdapterHanghoa;
 import stu.edu.vn.thigk.adapter.Adapterloaihanghoa;
-import stu.edu.vn.thigk.chonmenu;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.dao.DBHelperlhh;
 import stu.edu.vn.thigk.hanghoaUI.hienthihanghoa;
-import stu.edu.vn.thigk.hanghoaUI.nhaphanghoa;
-import stu.edu.vn.thigk.model.HangHoa;
 import stu.edu.vn.thigk.model.LoaiHangHoa;
 
 public class hienthiloaihanghoa extends AppCompatActivity {
@@ -40,6 +37,8 @@ public class hienthiloaihanghoa extends AppCompatActivity {
     Adapterloaihanghoa adapter;
     ListView listView;
     DBHelperlhh helper;
+    DBHelper helper2;
+
     List<LoaiHangHoa> listloaiHanghoa=new ArrayList<>();
     LoaiHangHoa chon;
     int requestcode=113,resultcode=115;
@@ -50,6 +49,7 @@ public class hienthiloaihanghoa extends AppCompatActivity {
         addControl();
         addEvent();
         helper=new DBHelperlhh(hienthiloaihanghoa.this);
+        helper2=new DBHelper(hienthiloaihanghoa.this);
 /*        helper.QueryData(DBHelper.Drop_table);
         helper.QueryData(DBHelper.SQL_Create_Table);*/
         hienthiloaiHanghoa();
@@ -131,19 +131,22 @@ public class hienthiloaihanghoa extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data.hasExtra("tralhh")){
-
-            if(data.hasExtra("tralhh")){
-                LoaiHangHoa s= (LoaiHangHoa) data.getSerializableExtra("tralhh");
-                if(helper.isMaloaiExists(s.getMaloai())){
+        if(requestCode==this.requestcode) {
+            if (data.hasExtra("tralhh")) {
+                LoaiHangHoa s = (LoaiHangHoa) data.getSerializableExtra("tralhh");
+                if (helper.isMaloaiExists(s.getMaloai())) {
                     helper.updateHanghoa(s);
                     hienthiloaiHanghoa();
-                }
-                else {
+                } else {
                     helper.insertloaiHanghoa(s);
                     hienthiloaiHanghoa();
                 }
+            } else {
+                hienthiloaiHanghoa();
             }
+        }
+        else {
+            hienthiloaiHanghoa();
         }
     }
     private void xulyxoa(int index) {
@@ -154,8 +157,15 @@ public class hienthiloaihanghoa extends AppCompatActivity {
         dialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                helper.deleteHanghoa(chon.getMaloai());
-                hienthiloaiHanghoa();
+                if(helper2.isPhanloaiEqual(chon.getTenloai())) {
+                    Toast.makeText(hienthiloaihanghoa.this,"ban khong the xoa",Toast.LENGTH_LONG).show();
+                    dialogInterface.dismiss();
+                }
+                else{
+                    helper.deleteHanghoa(chon.getMaloai());
+                    hienthiloaiHanghoa();
+                }
+
             }
         });
         dialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {

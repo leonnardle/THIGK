@@ -12,5 +12,10 @@
         android:title="exit"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/loaihanghoa"
+        android:title="xem loại hàng hóa"
+        app:showAsAction="always"
+        />
     <!-- Thêm các mục menu khác nếu cần -->
 </menu>

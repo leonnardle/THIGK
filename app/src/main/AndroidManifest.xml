@@ -42,9 +42,6 @@
             android:name=".loaihanghoaUI.hienthiloaihanghoa"
             android:exported="false" />
         <activity
-            android:name=".chonmenu"
-            android:exported="false" />
-        <activity
             android:name=".loaihanghoaUI.nhapLoaihanghoa"
             android:exported="false" />
         <activity

@@ -1,11 +1,14 @@
 package stu.edu.vn.thigk.dao;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,10 +86,6 @@ public class DBHelperlhh extends SQLiteOpenHelper {
 
     }
 
-
-
-
-
     public Cursor getData(String sql)
     {
         SQLiteDatabase database = getReadableDatabase();
@@ -107,6 +106,7 @@ public class DBHelperlhh extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldver ,int newver) {
 
     }
+
 
     public void deleteHanghoa(String Ma)
     {

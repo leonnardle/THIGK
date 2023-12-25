@@ -13,6 +13,7 @@
         android:id="@+id/toolbarNhaphanghoa"
         android:layout_width="match_parent"
         android:backgroundTint="@color/black"
+        app:title="nhập hàng"
         app:titleTextColor="@color/white"
         android:textAlignment="center"
         android:layout_height="?attr/actionBarSize"

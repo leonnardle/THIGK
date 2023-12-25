@@ -11,31 +11,37 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
+        app:title="chọn menu"
+        app:titleTextColor="@color/white"
         android:backgroundTint="#0A0C0A"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/btn_open_themloai"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="thêm loại hh"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
 
-    <Button
-        android:id="@+id/btn_open_hanghoa"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="thêm hh"
+
+    <ImageButton
+        android:id="@+id/btn_open_themloai"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:src="@drawable/loaihang"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintVertical_bias="0.498" />
+
+    <ImageButton
+        android:id="@+id/btn_open_hanghoa"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:src="@drawable/loaihanghoa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" /> <!-- Thêm hình ảnh cho ImageButton -->
+   />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

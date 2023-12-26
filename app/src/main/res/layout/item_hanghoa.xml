@@ -25,23 +25,23 @@
         android:layout_weight="0.65"
         android:orientation="vertical">
         <TextView
-            android:text="mã: "
+            android:text="@string/tv_ma"
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
         <TextView
-            android:text="tên: "
+            android:text="@string/tv_ten"
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
         <TextView
-            android:text="loại: "
+            android:text="@string/tv_loai"
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
         <TextView
-            android:text="giá: "
+            android:text="@string/tv_gia"
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
         <TextView
-            android:text="dung tích: "
+            android:text="@string/tv_dungtich"
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
 

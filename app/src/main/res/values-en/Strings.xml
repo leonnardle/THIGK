@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EXAM</string>
+    <string name="title_activity_abouts">abouts</string>
+    <string name="title_activity_exit">exit</string>
+    <string name="hanghoa">MERCHANDISE MANAGEMENT </string>
+    <string name="NHAPhanghoa">CREATE ITEM </string>
+    <string name="LOAIhanghoa">MANAGE TYPE  </string>
+    <string name="NHAPLOAIhanghoa">CREATE TYPE </string>
+    <string name="title_activity_xemloai">SEE TYPE</string>
+    <string name="tv_ma">code</string>
+    <string name="tv_ten">name</string>
+    <string name="tv_loai">type</string>
+    <string name="tv_gia">price</string>
+    <string name="tv_dungtich">size</string>
+
+    <string name="sign_up">sign up</string>
+    <string name="btn_luu">lưu</string>
+    <string name="tv_dnagnhap">sign in</string>
+
+</resources>

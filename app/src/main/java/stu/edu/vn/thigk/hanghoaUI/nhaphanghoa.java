@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import stu.edu.vn.thigk.R;
+import stu.edu.vn.thigk.SelectImage;
 import stu.edu.vn.thigk.about;
 import stu.edu.vn.thigk.dao.DBHelper;
 import stu.edu.vn.thigk.dao.DBHelperlhh;

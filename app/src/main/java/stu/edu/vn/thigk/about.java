@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import stu.edu.vn.thigk.databinding.ActivityAboutBinding;
-import stu.edu.vn.thigk.hanghoaUI.hienthihanghoa;
+
 
 public class about extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -37,6 +37,7 @@ public class about extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFragment);
         mapFragment.getMapAsync(this);
+
     }
     private void addControls() {
 

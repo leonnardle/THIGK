@@ -15,7 +15,7 @@
             android:id="@+id/toolbarLoaihanghoa"
             android:layout_width="match_parent"
             android:backgroundTint="@color/black"
-            app:title="QUẢN LÝ LOẠI HÀNG HÓA"
+            app:title="@string/LOAIhanghoa"
             app:titleTextColor="@color/white"
             android:textAlignment="center"
             android:layout_height="?attr/actionBarSize"

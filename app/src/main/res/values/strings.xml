@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">THIGK</string>
-    <string name="title_activity_abouts">abouts</string>
-    <string name="title_activity_about">about</string>
+    <string name="hanghoa">QUẢN LÝ HÀNG HÓA </string>
+    <string name="NHAPhanghoa">NHẬP HÀNG </string>
+    <string name="LOAIhanghoa">QUẢN LÝ LOẠI HÀNG </string>
+    <string name="NHAPLOAIhanghoa">NHẬP LOẠI HÀNG </string>
+    <string name="title_activity_abouts">thông tin</string>
+    <string name="title_activity_exit">thoát</string>
+    <string name="title_activity_xemloai">XEM LOẠI HÀNG</string>
+
+    <string name="tv_ma">mã</string>
+    <string name="tv_ten">tên</string>
+    <string name="tv_loai">loại</string>
+    <string name="tv_gia">giá </string>
+    <string name="tv_dungtich">dung tích </string>
+    <string name="sign_up">đăng nhập</string>
+    <string name="btn_luu">lưu</string>
+    <string name="tv_dnagnhap">đăng nhập</string>
+
+
+
 </resources>

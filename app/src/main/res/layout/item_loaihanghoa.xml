@@ -9,7 +9,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="tên :"
+            android:text="@string/tv_ten"
             android:layout_width="70dp"
             android:layout_height="30dp"
              />

@@ -5,16 +5,16 @@
 
     <item
         android:id="@+id/about"
-        android:title="about"
+        android:title="@string/title_activity_abouts"
         app:showAsAction="never" />
     <item
         android:id="@+id/exit"
-        android:title="exit"
+        android:title="@string/title_activity_exit"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/loaihanghoa"
-        android:title="xem loại hàng hóa"
+        android:title="@string/title_activity_xemloai"
         app:showAsAction="always"
         />
     <!-- Thêm các mục menu khác nếu cần -->
